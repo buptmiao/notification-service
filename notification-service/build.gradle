@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    // Spring Boot Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+    // MongoDB for persistence
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    
+    // RabbitMQ for message queue
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    
+    // Actuator for monitoring and health checks
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    
+    // Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    
+    // Prometheus metrics
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+    
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.amqp:spring-rabbit-test'
+    
+    // Property-based testing with jqwik
+    testImplementation 'net.jqwik:jqwik:1.9.2'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+bootBuildImage {
+    imagePlatform = "linux/amd64"
+    imageName = "notification-service:${System.getenv("IMAGE_TAG")}"
+    publish = false
+}

@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: notification-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/notification_db
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus,info
+  endpoint:
+    health:
+      show-details: always
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+# Notification service configuration
+# Requirements: 3.1, 3.2, 3.3
+notification:
+  # Maximum number of retry attempts before moving to DLQ (default: 5)
+  max-retry-count: 5
+  # Initial delay before first retry (default: 1s)
+  initial-retry-delay: 1s
+  # Maximum delay between retries (default: 1h)
+  max-retry-delay: 1h
+  # HTTP timeout for external API calls (default: 30s)
+  http-timeout: 30s
