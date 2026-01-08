@@ -1,7 +1,5 @@
 # Notification Service
 
-企业级 API 通知服务，为内部业务系统提供统一的 HTTP API 接口，负责将通知请求可靠地发送到各种外部系统供应商的 API。
-
 ## 问题理解
 
 ### 业务场景
@@ -300,27 +298,3 @@ docker run -d \
   -p 8080:8080 \
   notification-service:${IMAGE_TAG}
 ```
-
-### 配置项
-
-| 配置项 | 默认值 | 说明 |
-|--------|--------|------|
-| `notification.max-retry-count` | 5 | 最大重试次数 |
-| `notification.initial-retry-delay` | 1s | 初始重试延迟 |
-| `notification.max-retry-delay` | 1h | 最大重试延迟 |
-| `notification.http-timeout` | 30s | HTTP 请求超时 |
-
-## 监控指标
-
-| 指标名 | 类型 | 标签 | 说明 |
-|--------|------|------|------|
-| `notifications_total` | Counter | vendor_name, status | 通知总数 |
-| `notifications_delivery_duration_seconds` | Histogram | vendor_name | 投递耗时 |
-| `notifications_retry_total` | Counter | vendor_name | 重试次数 |
-| `notifications_failed_total` | Gauge | vendor_name | 失败通知数 |
-
-## 运维建议
-
-1. **告警配置**：当某个 vendor 的失败通知数量超过阈值时触发告警
-2. **定期巡检**：检查失败通知列表，分析失败原因
-3. **批量重试**：当外部系统恢复后，可批量触发失败通知重试
