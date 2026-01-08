@@ -4,9 +4,13 @@ server:
 spring:
   application:
     name: notification-service
+  threads:
+    virtual:
+      enabled: true
   data:
     mongodb:
-      uri: mongodb://localhost:27017/notification_db
+      uri: mongodb://root:secret@127.0.0.1:27017/mydatabase?authSource=admin
+      auto-index-creation: true
   rabbitmq:
     host: localhost
     port: 5672
