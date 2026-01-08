@@ -260,7 +260,7 @@ DELETE /api/v1/notifications/{id}
 
 ```bash
 # 启动依赖服务
-docker-compose up -d mongodb rabbitmq
+docker-compose up -d
 
 # 运行服务
 ./gradlew :notification-service:bootRun
